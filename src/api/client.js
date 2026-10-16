@@ -1,15 +1,20 @@
 // API Client for Solana Memecoin Beginner Lead Finder
 
-// Helper to get configured backend URL
 export function getBackendBaseUrl() {
   const customUrl = localStorage.getItem('solana_leads_backend_url');
+
   if (customUrl && customUrl.trim()) {
     return customUrl.trim().replace(/\/+$/, '');
   }
-  // Default to localhost for local development, or relative if on same origin
-  if (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')) {
+
+  if (
+    typeof window !== 'undefined' &&
+    (window.location.hostname === 'localhost' ||
+      window.location.hostname === '127.0.0.1')
+  ) {
     return 'http://127.0.0.1:8000';
   }
+
   return '';
 }
 
@@ -17,9 +22,13 @@ export function setBackendBaseUrl(url) {
   if (!url) {
     localStorage.removeItem('solana_leads_backend_url');
   } else {
-    localStorage.setItem('solana_leads_backend_url', url.trim().replace(/\/+$/, ''));
+    localStorage.setItem(
+      'solana_leads_backend_url',
+      url.trim().replace(/\/+$/, '')
+    );
   }
 }
+
 
 // Session token (stored in sessionStorage - short lived, not permanent localStorage)
 export function getSessionToken() {
